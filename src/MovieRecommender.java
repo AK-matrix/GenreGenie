@@ -36,13 +36,14 @@ public class MovieRecommender {
         String[] nextLine;
         reader.readNext(); // Skip the header
         while ((nextLine = reader.readNext()) != null) {
-            movies.add(new Movie(nextLine[0], nextLine[1], nextLine[3]));
+            movies.add(new Movie(nextLine[0], nextLine[1], nextLine[2]));
         }
         reader.close();
         System.out.println("Loaded " + movies.size() + " movies.");
     }
     public String[] preprocessGenres(String genres) {
-        return genres.split("\\|"); // Split genres like "Action|Comedy" into ["Action", "Comedy"]
+
+        return genres.split(","); // Split genres like "Action|Comedy" into ["Action", "Comedy"]
     }
     public List<Movie> recommend(String title, int topN) {
         Map<String, Double> idfMap = TFIDF.computeIDF(movies);
@@ -50,12 +51,12 @@ public class MovieRecommender {
 
         if (targetMovie == null) return Collections.emptyList();
 
-        double[] targetVector = TFIDF.computeTFIDF(targetMovie.genres.split(", "), idfMap);
+        double[] targetVector = TFIDF.computeTFIDF(targetMovie.genres.split(","), idfMap);
         PriorityQueue<MovieSimilarity> pq = new PriorityQueue<>((a, b) -> Double.compare(b.similarity, a.similarity));
 
         for (Movie movie : movies) {
             if (!movie.title.equals(title)) {
-                double[] movieVector = TFIDF.computeTFIDF(movie.genres.split(", "), idfMap);
+                double[] movieVector = TFIDF.computeTFIDF(movie.genres.split(","), idfMap);
                 double similarity = Similarity.cosineSimilarity(targetVector, movieVector);
                 pq.offer(new MovieSimilarity(movie, similarity));
                // System.out.println(movie.title + ": Similarity = " + similarity);

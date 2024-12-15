@@ -15,6 +15,7 @@ public class TFIDF {
         // Count frequency of each genre
         for (String genre : genres) {
             genre = genre.trim();  // Trim any leading/trailing spaces
+            genre = genre.replaceAll("^\"|\"$", "");;
             tfMap.put(genre, tfMap.getOrDefault(genre, 0) + 1);
         }
 
@@ -40,7 +41,7 @@ public class TFIDF {
     public static Map<String, Double> computeIDF(List<Movie> movies) {
         Map<String, Integer> docCounts = new HashMap<>();
         for (Movie movie : movies) {
-            Set<String> uniqueGenres = new HashSet<>(Arrays.asList(movie.genres.split(", ")));
+            Set<String> uniqueGenres = new HashSet<>(Arrays.asList(movie.genres.split(",")));
             for (String genre : uniqueGenres) {
                 docCounts.put(genre, docCounts.getOrDefault(genre, 0) + 1);
 
@@ -50,6 +51,7 @@ public class TFIDF {
         int totalDocs = movies.size();
         for (Map.Entry<String, Integer> entry : docCounts.entrySet()) {
             idfMap.put(entry.getKey(), Math.log((double) totalDocs / entry.getValue()));
+
         }
         return idfMap;
     }
@@ -58,7 +60,8 @@ public class TFIDF {
             double[] tfidfVector = new double[idfMap.size()];
             int i = 0;
             for (String genre : idfMap.keySet()) {
-                tfidfVector[i++] = tfMap.getOrDefault(genre, 0.0) * idfMap.get(genre);
+               tfidfVector[i++] = tfMap.getOrDefault(genre, 0.0) * idfMap.get(genre);
+
 
             }
             return tfidfVector;

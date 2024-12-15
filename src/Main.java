@@ -7,7 +7,7 @@ public class Main {
         MovieRecommender recommender = new MovieRecommender();
         recommender.loadMovies("src/abc.csv"); // Path to your dataset
         Scanner scanner = new Scanner(System.in);
-        List<Movie> recommendations = recommender.recommend(scanner.next(), 5);
+        List<Movie> recommendations = recommender.recommend(scanner.nextLine(), 5);
         System.out.println("Recommended movies:");
         for (Movie movie : recommendations) {
             System.out.println(movie.title);
