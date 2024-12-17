@@ -1,3 +1,9 @@
+# GenReGenie
+
+**GenReGenie** is a recommendation algorithm that suggests movies based on thematic similarities to a given movie input. By leveraging fundamental concepts of **Machine Learning** such as **TF (Term Frequency)**, **IDF (Inverse Document Frequency)**, and **Cosine Similarity**, GenReGenie identifies movies from IMDb's top 1000 list that share common themes and characteristics with the input movie.
+
+---
+
 ## Features
 
 ### Movie Recommendation
