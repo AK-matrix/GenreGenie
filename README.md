@@ -1,1 +1,13 @@
-Algorithm that uses the fundamental concepts of Machine Learning such as TF, IDF, and cosine similarity to compute the recommended set of movies depending on a movie that is entered as input. It utilizes a cleaned dataset of IMDb's top 1000 movies. The recommended movies are supposed to have thematic similarities with the the movie that is given.
+## Features
+
+### Movie Recommendation
+- **Input Movie**: Users can enter a movie title.
+- **Thematic Similarity**: Recommendations are generated based on the thematic similarities of the input movie.
+  
+### Algorithmic Approach
+- **TF-IDF**: Used to analyze the frequency of words across movie descriptions.
+- **Cosine Similarity**: Measures the similarity between the input movie and other movies in the dataset based on their content.
+  
+### Dataset
+- **IMDb's Top 1000 Movies**: A cleaned dataset of the top 1000 movies according to IMDb, used to generate accurate recommendations.
+
